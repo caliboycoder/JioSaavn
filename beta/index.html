@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html data-bs-theme="auto" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Melodify</title>
+    <meta name="theme-color" content="#0b2d39">
+    <script>
+        (function() {
+
+            // JavaScript snippet handling Dark/Light mode switching
+
+            const getStoredTheme = () => localStorage.getItem('theme');
+            const setStoredTheme = theme => localStorage.setItem('theme', theme);
+            const forcedTheme = document.documentElement.getAttribute('data-bss-forced-theme');
+
+            const getPreferredTheme = () => {
+
+                if (forcedTheme) return forcedTheme;
+
+                const storedTheme = getStoredTheme();
+                if (storedTheme) {
+                    return storedTheme;
+                }
+
+                const pageTheme = document.documentElement.getAttribute('data-bs-theme');
+
+                if (pageTheme) {
+                    return pageTheme;
+                }
+
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            const setTheme = theme => {
+                if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', theme);
+                }
+            }
+
+            setTheme(getPreferredTheme());
+
+            const showActiveTheme = (theme, focus = false) => {
+                const themeSwitchers = [].slice.call(document.querySelectorAll('.theme-switcher'));
+
+                if (!themeSwitchers.length) return;
+
+                document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                    element.classList.remove('active');
+                    element.setAttribute('aria-pressed', 'false');
+                });
+
+                for (const themeSwitcher of themeSwitchers) {
+
+                    const btnToActivate = themeSwitcher.querySelector('[data-bs-theme-value="' + theme + '"]');
+
+                    if (btnToActivate) {
+                        btnToActivate.classList.add('active');
+                        btnToActivate.setAttribute('aria-pressed', 'true');
+                    }
+                }
+            }
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const storedTheme = getStoredTheme();
+                if (storedTheme !== 'light' && storedTheme !== 'dark') {
+                    setTheme(getPreferredTheme());
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', () => {
+                showActiveTheme(getPreferredTheme());
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const theme = toggle.getAttribute('data-bs-theme-value');
+                            setStoredTheme(theme);
+                            setTheme(theme);
+                            showActiveTheme(theme);
+                        })
+                    })
+            });
+        })();
+    </script>
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="manifest" href="manifest.json?h=cc746c5836f94ed3e50637d81f0e432e" crossorigin="use-credentials">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=03bc88feb8c0ce198a12645fce792b30">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides-1.css?h=1041d609295e3322662d454aaba9a81e">
+    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css?h=245a1b8d60afda495620c8d113a2d952">
+    <link rel="stylesheet" href="assets/css/loader.css?h=d81a4aaa23dcaf43c7a2ba10caad63d2">
+    <link rel="stylesheet" href="assets/css/Player-1.css?h=29e4e280d2299b8a59bf12d373d0fa94">
+    <link rel="stylesheet" href="assets/css/Player-2.css?h=bfe059466d9f68af265be6e9138b7f03">
+    <link rel="stylesheet" href="assets/css/song-card.css?h=4c41c1ea5f68863164ed12188873c132">
+    <link rel="stylesheet" href="assets/css/styles.css?h=6ddd9824f5741bf0886262ec174a34e1">
+    <link rel="stylesheet" href="assets/css/temp.css?h=638cd4996648200bedd018813158b6c2">
+    <link rel="stylesheet" href="assets/css/bottom-bar.css?h=4ceb2234289f31038496d9ed384afb59">
+</head>
+
+<body class="bg-secondary" style="margin-left: 7px;margin-bottom: 5px;margin-right: 7px;margin-top: 5px;">
+    <div class="all-content">
+        <div class="settings" style="display: none;border-radius: 20px;border-top-width: 2px;border-top-style: dashed;border-bottom-width: 2px;border-bottom-style: dashed;"><span id="settingsText">Settings</span>
+            <div>
+                <div class="settings-options"><span class="settings-option-text">Theme</span><div class="theme-dropdown">
+        <button class="theme-dropdown-btn">Theme ▾</button>
+        <div class="theme-dropdown-content hidden">
+            <div data-bs-theme-value="light">Light</div>
+            <div data-bs-theme-value="dark">Dark</div>
+            <div data-bs-theme-value="auto" class="selected">Auto</div>
+        </div>
+    </div></div>
+                <div class="settings-options"><span class="settings-option-text">Quality</span>
+                    <div class="custom-dropdown"><button class="dropdown-btn">320 kbps ▾</button>
+                        <div class="dropdown-content universal-quality hidden">
+                            <div data-value="12kbps"><span>12 kbps</span></div>
+                            <div data-value="48kbps"><span>48 kbps</span></div>
+                            <div data-value="96kbps"><span>96 kbps</span></div>
+                            <div data-value="160kbps"><span>160 kbps</span></div>
+                            <div class="selected" data-value="320kbps"><span>320 kbps</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-options"><span class="settings-option-text">Allow same song multiple times in Queue</span>
+                    <div id="toggleSwitchCont" class="toggle-switch"><span id="toggleStatus">False</span><input type="checkbox" data-toggle="toggle" id="allowDuplicatesToggle"></div>
+                </div>
+                <div class="settings-options">
+                    <div id="timer">
+                        <h5>Sleep Timer</h5>
+                        <div id="setTimer">
+                            <div><label class="label-time-input" for="timeInput">Time:&nbsp;</label><input type="number" id="inputHours" class="time-input" min="0" max="23" placeholder="HH"><span>:</span><input type="number" id="inputMinutes" class="time-input" min="0" max="59" placeholder="MM"></div><button class="btn btn-primary" id="setTimerBtn" type="button">Set Timer</button>
+                        </div>
+                        <div id="countdownDisplay"><span id="countdownDisplaySpan">No Timer Set</span><button class="btn" id="cancelTimerBtn" type="button">Cancel Timer</button></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div><button class="btn btn-primary" type="button" style="width: 80px;color: white;font-weight: bold;background: var(--bs-primary);margin: 16px;" onclick="showSettings();">Save</button>
+        </div>
+        <div class="search-container w-full flex flex-col items-center" style="display:none;">
+            <div class="tab-container"><button class="active-tab tab-btn" data-category="songs">Songs</button><button class="tab-btn" data-category="playlists">Playlists</button><button class="tab-btn" data-category="albums">Albums</button><button class="tab-btn" data-category="artists">Artists</button></div>
+            <form class="search-form"><input type="search" id="search-box" class="search-box" placeholder="Search for Songs..."><button class="search-btn" type="submit"><i class="fa fa-search text-lg"></i></button></form>
+        </div>
+        <div class="main-content">
+            <div class="song-card-list" style="display:none;"><img id="songList" class="song-list" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+                <div id="headingContent"><span class="card-list-header">With ❤️ by Aryan</span>
+                    <div id="headingOptions"><button class="btn btn-primary add-list-to-queue" type="button"><i class="fas fa-play"></i></button><button class="btn btn-primary list-menu" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-menu-deep">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 6h16"></path>
+                                <path d="M7 12h13"></path>
+                                <path d="M10 18h10"></path>
+                            </svg></button></div>
+                </div>
+                <div class="song-card-container">
+                    <div class="container song-card">
+                        <div class="song-card-cont1 song-card-cont1-details"><img class="song-card-img" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+                            <div class="song-details"><span class="song-card-name">Melodify</span><span class="song-card-artists">With ❤️ by Aryan</span><span class="song-card-song-id hidden">With ❤️ by Aryan</span><span class="song-card-song-url0 hidden">With ❤️ by Aryan</span><span class="song-card-song-url1 hidden">With ❤️ by Aryan</span><span class="song-card-song-url2 hidden">With ❤️ by Aryan</span><span class="song-card-song-url3 hidden">With ❤️ by Aryan</span><span class="song-card-song-url4 hidden">With ❤️ by Aryan</span><span class="song-card-song-imgHD hidden">With ❤️ by Aryan</span></div>
+                        </div>
+                        <div class="song-card-cont1"><button class="btn btn-primary song-card-btn song-card-btn-queue" id="addToQueueBtn" type="button"><i class="icon ion-android-add"></i></button><button class="btn btn-primary song-card-btn" type="button"><i class="icon-options-vertical" style="font-size: 16px;"></i></button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-buttons"></div>
+            <div class="additional-details"><span id="relatedSpan" class="heading" style="display:none;">You might Love</span>
+                <div id="related" class="related"></div><span id="trendingDataSpan" class="heading" style="display:none;">Trending Now</span>
+                <div id="trendingData" class="trending"></div><span id="moreFromArtistSpan" class="heading" style="display:none;">More From Artists</span>
+                <div id="moreFromArtist" class="more-from-artist"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container home" id="home"><span id="topChartsSpan" class="heading">Top Charts</span>
+        <div id="topCharts"></div><span id="trendingSpan" class="heading">New Trending</span>
+        <div id="trending"></div><span id="playlistsSpan" class="heading">Top Playlists</span>
+        <div id="playlists"></div><span id="albumsSpan" class="heading">New Releases</span>
+        <div id="albums"></div><span id="artistsSpan" class="heading">Artists</span>
+        <div id="artists"></div>
+    </div>
+    <div id="popup" class="popup-overlay audio-player11 hidden" style="margin-bottom: 80px;margin-top: -20px;height: 100vh;backdrop-filter: blur(75px);-webkit-backdrop-filter: blur(75px);">
+        <div id="popupSecondary" style="width: 100vw;height: 100%;background: rgba(0,0,0,0);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);">
+            <div id="audioPlayer1" class="audio-player1">
+                <div class="popup-div-song-details" style="backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;">
+                    <div id="player1-img" class="album-art"><img class="player1-img" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f" alt="Album Art" style="width: 100%;height: 100%;object-fit: cover;"></div>
+                    <div>
+                        <div id="trackInfoPopup" class="track-info">
+                            <div id="trackTitlePopup" class="track-title"><span id="playerNamePopup" class="player1-name" style=";text-align: left;">Melodify</span></div>
+                            <div class="track-artist"><span id="playerArtistsPopup" class="player1-artists" style="text-align: left;">With ❤️ by Aryan</span></div>
+                        </div>
+                        <div class="controls"><button class="control-btn" onclick="previousTrack();"><i class="fas fa-backward"></i></button><button class="control-btn play-pause play-pause-btn1"><i class="fas fa-play"></i></button><button class="control-btn" onclick="nextTrack()"><i class="fas fa-forward"></i></button><button class="btn control-btn loop-btn" type="button"><i class="material-icons" style="font-size: 18px;">loop</i></button></div>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar progress-bar123">
+                        <div class="progress progress123"></div>
+                    </div>
+                    <div class="time-info" style="margin-top: 2px; display:none;"><span class="currentTime1">0:00</span><span class="totalTime1">3:45</span></div>
+                </div>
+                <div class="volume-container" style="display:none;"><i class="fas fa-volume-up"></i>
+                    <div id="volumeSlider" class="volume-slider">
+                        <div id="volumeLevel" class="volume-level"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="song-card-queue" style="margin-top: 20px;">
+                <div id="upNextDiv" style="margin-bottom: 6px;">
+                    <div><span style="font-size: 16px;font-weight: bold;margin-left: 10px;">Up Next</span></div>
+                    <div>
+                        <div id="autoPlay" class="auto-play" onclick="toggleAutoplay();"><span style="font-size: 16px;font-weight: bold;margin-left: 10px;">AutoPlay</span><input type="checkbox" id="autoPlaySwitch" data-toggle="toggle"></div>
+                    </div>
+                </div>
+                <div class="song-card-container-queue">
+                    <div class="container song-card-queue2">
+                        <div class="song-card-cont1"><img class="song-card-img" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+                            <div class="song-details"><span class="song-card-name">Melodify</span><span class="song-card-artists">With ❤️ by Aryan</span><span class="song-card-song-id hidden">With ❤️ by Aryan</span><span class="song-card-song-index hidden">With ❤️ by Aryan</span><span class="song-card-song-imgHD hidden">With ❤️ by Aryan</span></div>
+                        </div>
+                        <div class="song-card-cont1"><button class="btn btn-primary song-card-btn" type="button"><i class="icon-options-vertical" style="font-size: 16px;"></i></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="message"></div>
+    <div class="text-light text-bg-secondary audio-player2" style="color: var(--bs-light);margin-top: 20px;transform: translate(0px);padding-left: 0px;"><div class="audio-file hidden">
+    <audio src=""></audio>
+</div>
+        <div id="bttomPlayer" style="width: 100%;padding-right: 0px;margin-bottom: 0px;padding-top: 4px;">
+            <div class="text-primary progress-bar progress-bar12">
+                <div class="text-primary progress progress12"></div>
+            </div>
+            <div class="text-light progress-container">
+                <div class="controls" style="margin-left: 0px;">
+                    <div class="div-details expand-player">
+                        <div class="album-art" style="width: 47px;height: 47px;margin-bottom: 0px;margin-left: 0px;"><img class="player2-img expand-player" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f" alt="Album Art" style="width: 100%;height: 100%;object-fit: cover;"></div>
+                        <div class="track-info2" style="margin-left: 0px;">
+                            <div id="trackTitle" class="track-title"><span class="player21-name" style="color:var(--bs-light);">Melodify</span></div>
+                            <div class="text-light track-artist"><span class="player2-artists">With ❤️ by Aryan</span></div>
+                        </div>
+                    </div>
+                    <div id="large-player1" class="div-large hidden"><button class="control-btn1" style="width: 30px;height: 30px;"><i class="fas fa-backward"></i></button><button class="control-btn1 play-pause1 play-pause-btn22" style="padding: 0px;"><i class="fas fa-play" style="font-size: 17px;"></i></button><button class="control-btn1" style="width: 30px;height: 30px;"><i class="fas fa-forward"></i></button></div>
+                    <div id="timePausePlay" class="time-pause-play">
+                        <div class="time-pause-play" style="padding-right: 30px;"><span class="currentTime expand-player" style="height: 22px;">0:00</span><span class="expand-player" style="height: 22px;padding-left: 5px;padding-right: 5px;">/</span><span class="totalTime expand-player" style="margin-right: -20px;height: 22px;">-:-</span></div><button class="control-btn play-pause play-pause-btn" style="padding: 0px;width: 60px;"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottomBar" class="bottom-bar"><button class="btn bottom-bar-btn" id="bottomBarHome" type="button" onclick="goToHome();"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" class="bottom-bar-icon">
+                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                    <path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"></path>
+                </svg></button><button class="btn bottom-bar-btn" id="bottomBarSearch" type="button" onclick="btnClicked(&quot;browse&quot;)"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-search bottom-bar-icon">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                    <path d="M21 21l-6 -6"></path>
+                </svg></button><button class="btn bottom-bar-btn" id="bottomBarDownloads" type="button" onclick="getAllDownloadedSongs();"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" class="bottom-bar-icon">
+                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"></path>
+                </svg></button><button class="btn bottom-bar-btn" id="bottomBarLibrary" type="button" onclick="getAllDownloadedSongs();"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" class="bottom-bar-icon">
+                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                    <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zm-7.5-1c1.38 0 2.5-1.12 2.5-2.5V7h3V5h-4v5.51c-.42-.32-.93-.51-1.5-.51-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"></path>
+                </svg></button><button class="btn bottom-bar-btn" id="bottomBarSettings" type="button" onclick="showSettings();"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" class="bottom-bar-icon">
+                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                    <path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"></path>
+                </svg></button></div>
+    </div>
+    <div class="loading-container" style="display:none;">
+        <div class="loading-img"><img id="loaderImg" src="assets/img/logo.png?h=44988d185d7b6c26c8c58d084f8b0e1f">
+            <div class="loading-ring"></div>
+        </div>
+    </div>
+    <div id="offline-indicator" style="display:none;position:fixed;top:0;left:0;right:0;background-color:#f44336;color:white;text-align:center;padding:5px;z-index:9999;"><span> You're offline. Showing downloaded content.</span></div>
+    <div style="padding-bottom: 100px;"><script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/decrypt_media_url.js?h=1bbe237796b8afae598e8a10f68d8ce3"></script>
+    <script src="assets/js/downloads.js?h=4f515760dc546a5ca5ee5b7ec4171e04"></script>
+    <script src="assets/js/home.js?h=0a16f8b5ff9d15ee96875c6c79374bcd"></script>
+    <script src="assets/js/player.js?h=fa19cade7990bf86c3a470b7b4003973"></script>
+    <script src="assets/js/player-queue.js?h=7ce8afbb39434e7a2e9e7cc7e056cc08"></script>
+    <script src="assets/js/scripts.js?h=488bfb41ce831e331ab49a325ef2f8c8"></script>
+    <script src="assets/js/search-api.js?h=b9c2bbe6b3c441995f0b80c21836c960"></script>
+    <script src="assets/js/service-worker.js?h=ef630e751d4401989dec53659ef80447"></script>
+    <script src="assets/js/bottom-bar.js?h=808e907a214e6443c3271dc280724424"></script>
+    <script src="assets/js/timer.js?h=a0d256b206a6f968ab1279083834d9dc"></script>
+</body>
+
+</html>
